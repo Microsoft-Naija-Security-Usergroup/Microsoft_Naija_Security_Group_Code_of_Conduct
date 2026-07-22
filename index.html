@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Microsoft Naija Security Group — Code of Conduct</title>
+<style>
+  :root{
+    --ms-blue:#0067B8;
+    --ms-blue-dark:#005A9E;
+    --ms-navy:#201F1E;
+    --text:#201F1E;
+    --text-secondary:#484644;
+    --border:#E1DFDD;
+    --bg-body:#FFFFFF;
+    --bg-nav:#FAF9F8;
+    --bg-header:#FFFFFF;
+    --green:#107C10;
+    --red:#A80000;
+    --amber:#805B00;
+    --amber-bg:#FFF4CE;
+    --red-bg:#FDE7E9;
+    --green-bg:#DFF6DD;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg-body);
+    color:var(--text);
+    font-family:"Segoe UI","Segoe UI Web",-apple-system,BlinkMacSystemFont,Roboto,Helvetica,Arial,sans-serif;
+    font-size:15px;
+    line-height:1.55;
+  }
+  a{color:var(--ms-blue);}
+
+  header.site-header{
+    border-bottom:1px solid var(--border);
+    background:var(--bg-header);
+  }
+  .header-inner{
+    max-width:1180px; margin:0 auto;
+    display:flex; align-items:center; gap:16px;
+    padding:14px 24px;
+  }
+  .header-inner img.logo{
+    width:52px; height:52px; border-radius:50%; flex-shrink:0;
+    box-shadow:0 0 0 1px var(--border);
+  }
+  .header-title h1{
+    font-size:17px; font-weight:600; margin:0; color:var(--ms-navy);
+  }
+  .header-title p{
+    font-size:12.5px; color:var(--text-secondary); margin:2px 0 0;
+  }
+  .header-right{
+    margin-left:auto; text-align:right; font-size:12px; color:var(--text-secondary);
+  }
+  .header-right b{display:block; color:var(--text); font-size:12.5px; font-weight:600;}
+
+  .accent-bar{height:3px; background:linear-gradient(90deg,#F25022 0%,#F25022 25%,#7FBA00 25%,#7FBA00 50%,#00A4EF 50%,#00A4EF 75%,#FFB900 75%,#FFB900 100%);}
+
+  .shell{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    max-width:1180px;
+    margin:0 auto;
+  }
+  @media (max-width:880px){ .shell{grid-template-columns:1fr;} }
+
+  nav.sidebar{
+    background:var(--bg-nav);
+    border-right:1px solid var(--border);
+    padding:28px 0;
+    position:sticky; top:0; align-self:start; height:100vh; overflow-y:auto;
+  }
+  @media (max-width:880px){ nav.sidebar{position:relative; height:auto; border-right:none; border-bottom:1px solid var(--border);} }
+  nav.sidebar .toc-label{
+    font-size:11px; font-weight:600; letter-spacing:.04em; text-transform:uppercase;
+    color:var(--text-secondary); padding:0 24px; margin-bottom:10px;
+  }
+  nav.sidebar a{
+    display:block; padding:8px 24px; font-size:13.5px; text-decoration:none;
+    color:var(--text-secondary); border-left:3px solid transparent;
+  }
+  nav.sidebar a:hover{background:#F3F2F1; color:var(--text);}
+  nav.sidebar a.active{
+    color:var(--ms-blue); border-left-color:var(--ms-blue); background:#EFF6FC; font-weight:600;
+  }
+
+  main{padding:0 0 60px;}
+  .intro{padding:40px 48px 32px; border-bottom:1px solid var(--border);}
+  @media (max-width:640px){ .intro{padding:28px 20px;} }
+  .intro h2{font-size:26px; font-weight:600; color:var(--ms-navy); margin:0 0 12px;}
+  .intro p{font-size:15px; color:var(--text-secondary); max-width:720px; margin:0 0 8px;}
+  .intro .updated{
+    display:inline-block; margin-top:14px; font-size:12.5px; color:var(--text-secondary);
+    border:1px solid var(--border); border-radius:4px; padding:4px 10px;
+  }
+
+  section.doc-section{padding:36px 48px; border-bottom:1px solid var(--border); scroll-margin-top:20px;}
+  @media (max-width:640px){ section.doc-section{padding:28px 20px;} }
+  section.doc-section:last-of-type{border-bottom:none;}
+
+  .section-title{
+    font-size:20px; font-weight:600; color:var(--ms-navy);
+    margin:0 0 6px; display:flex; align-items:baseline; gap:10px;
+  }
+  .section-title .num{font-size:14px; font-weight:400; color:var(--text-secondary);}
+  .section-lede{color:var(--text-secondary); max-width:720px; font-size:14.5px; margin:0 0 20px;}
+
+  h3.sub{font-size:15px; font-weight:600; color:var(--ms-navy); margin:24px 0 10px;}
+
+  ul.list{margin:0 0 4px; padding-left:20px; max-width:720px;}
+  ul.list li{color:var(--text-secondary); margin-bottom:6px; font-size:14.5px;}
+
+  .note{
+    border:1px solid var(--border); border-left:3px solid var(--ms-blue);
+    background:#F8FBFD; padding:12px 16px; font-size:13.5px; color:var(--text-secondary);
+    max-width:720px; margin-top:16px;
+  }
+
+  .split{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  @media (max-width:760px){ .split{grid-template-columns:1fr;} }
+  .split-col{border:1px solid var(--border); border-radius:4px; padding:18px 20px;}
+  .split-col h4{
+    font-size:14px; font-weight:600; margin:0 0 12px; padding-bottom:8px; border-bottom:1px solid var(--border);
+  }
+  .split-col.good h4{color:var(--green);}
+  .split-col.bad h4{color:var(--red);}
+
+  .violation-item{padding:14px 0; border-bottom:1px solid var(--border);}
+  .violation-item:last-child{border-bottom:none;}
+  .violation-item h4{font-size:14.5px; font-weight:600; margin:0 0 8px; color:var(--ms-navy);}
+
+  table.plain{border-collapse:collapse; width:100%; max-width:720px; margin-top:8px;}
+  table.plain td{padding:9px 12px; border:1px solid var(--border); font-size:14px; color:var(--text-secondary); vertical-align:top;}
+  table.plain td.label{font-weight:600; color:var(--text); width:150px; background:#FAF9F8;}
+
+  ol.escalation{list-style:none; margin:14px 0 0; padding:0; max-width:720px;}
+  ol.escalation li{
+    display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--border);
+  }
+  ol.escalation li:last-child{border-bottom:none;}
+  ol.escalation .step-num{
+    flex-shrink:0; width:26px; height:26px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:12.5px; font-weight:600; color:#fff;
+  }
+  ol.escalation li:nth-child(1) .step-num{background:var(--ms-blue);}
+  ol.escalation li:nth-child(2) .step-num{background:var(--amber);}
+  ol.escalation li:nth-child(3) .step-num{background:var(--red);}
+  ol.escalation .step-text b{display:block; font-size:14px; color:var(--text); margin-bottom:2px;}
+  ol.escalation .step-text span{font-size:13.5px; color:var(--text-secondary);}
+
+  .tag{
+    display:inline-block; font-size:11.5px; font-weight:600; padding:2px 9px; border-radius:3px; margin-bottom:10px;
+  }
+  .tag.minor{background:var(--amber-bg); color:var(--amber);}
+  .tag.major{background:var(--red-bg); color:var(--red);}
+
+  footer.site-footer{
+    border-top:1px solid var(--border); padding:24px 48px; font-size:12.5px; color:var(--text-secondary);
+    max-width:1180px; margin:0 auto;
+  }
+  @media (max-width:640px){ footer.site-footer{padding:20px;} }
+
+  #tocToggle{display:none;}
+  @media (max-width:880px){
+    #tocToggle{
+      display:flex; width:100%; justify-content:space-between; align-items:center;
+      background:none; border:none; font-family:inherit; font-weight:600; font-size:13.5px;
+      color:var(--text); padding:0 24px 12px; cursor:pointer;
+    }
+    nav.sidebar .toc-links{display:none;}
+    nav.sidebar .toc-links.open{display:block;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <img class="logo" src="assets/mnsug-logo.png" alt="Microsoft Naija Security User Group logo">
+    <div class="header-title">
+      <h1>Microsoft Naija Security Group</h1>
+      <p>Community Code of Conduct</p>
+    </div>
+    <div class="header-right">
+      <b>Status: Active</b>
+      Last updated June 2026
+    </div>
+  </div>
+</header>
+<div class="accent-bar"></div>
+
+<div class="shell">
+  <nav class="sidebar">
+    <div class="toc-label">On this page</div>
+    <button id="tocToggle" onclick="document.querySelector('.toc-links').classList.toggle('open')">
+      Contents <span>▾</span>
+    </button>
+    <div class="toc-links">
+      <a href="#purpose">1. Purpose</a>
+      <a href="#principles">2. Community Principles</a>
+      <a href="#expected">3. Expected Behavior</a>
+      <a href="#unacceptable">4. Unacceptable Behavior</a>
+      <a href="#leadership">5. Leadership Commitment</a>
+      <a href="#speakers">6. Speaker &amp; Contributor Responsibilities</a>
+      <a href="#reporting">7. Reporting &amp; Incident Handling</a>
+      <a href="#violations">8. Violation of Community Rules</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="intro">
+      <h2>Community Code of Conduct</h2>
+      <p>This Code of Conduct sets the standard for how everyone in the Microsoft Naija Security Group community — members, leaders, speakers, volunteers, sponsors, and participants — is expected to behave in meetings, events, online platforms, and social channels.</p>
+      <span class="updated">Last updated: June 2026</span>
+    </div>
+
+    <section class="doc-section" id="purpose">
+      <h2 class="section-title"><span class="num">1.</span>Purpose</h2>
+      <p class="section-lede">Our community exists to create a safe, respectful, inclusive, and collaborative environment for everyone interested in cloud security, cybersecurity, compliance, governance, and related Microsoft technologies. We encourage learning, networking, mentorship, innovation, and professional growth.</p>
+      <div class="note">All members, leaders, speakers, volunteers, sponsors, and participants are expected to follow this Code of Conduct in all community spaces, including meetings, events, online platforms, social media groups, workshops, and conferences.</div>
+    </section>
+
+    <section class="doc-section" id="principles">
+      <h2 class="section-title"><span class="num">2.</span>Community Principles</h2>
+      <p class="section-lede">Our community principles define how we behave, collaborate, and make decisions. These principles guide our actions and ensure consistency across all interactions.</p>
+
+      <h3 class="sub">2.1 Integrity &amp; Professionalism</h3>
+      <ul class="list">
+        <li>Avoid misleading claims or unverified technical assertions</li>
+        <li>Respect intellectual property and give proper credit</li>
+        <li>Be honest and transparent in all interactions</li>
+      </ul>
+
+      <h3 class="sub">2.2 Collaboration &amp; Knowledge Sharing</h3>
+      <ul class="list">
+        <li>Support beginners and encourage questions</li>
+        <li>Give helpful feedback without belittling others</li>
+        <li>Promote teamwork and community growth</li>
+      </ul>
+
+      <h3 class="sub">2.3 Respect &amp; Inclusivity</h3>
+      <ul class="list">
+        <li>Avoid discrimination, harassment, or offensive behavior</li>
+        <li>Treat every member with respect, dignity, and fairness, regardless of background, experience level, or perspective</li>
+      </ul>
+
+      <h3 class="sub">2.4 Ethical Security Practices</h3>
+      <ul class="list">
+        <li>Do not share customer or organizational sensitive data</li>
+        <li>Promote responsible disclosure</li>
+        <li>Avoid enabling harmful or malicious activities</li>
+      </ul>
+    </section>
+
+    <section class="doc-section" id="expected">
+      <h2 class="section-title"><span class="num">3.</span>Expected Behavior</h2>
+      <p class="section-lede">A summary of what we ask of everyone in the community, alongside what is not tolerated (see Section 4).</p>
+      <div class="split">
+        <div class="split-col good">
+          <h4>Expected</h4>
+          <ul class="list">
+            <li>Treat others with respect and professionalism</li>
+            <li>Be open to diverse viewpoints</li>
+            <li>Share knowledge responsibly</li>
+            <li>Respect privacy and confidentiality</li>
+            <li>Follow community and event guidelines</li>
+          </ul>
+        </div>
+        <div class="split-col bad">
+          <h4>Not Tolerated</h4>
+          <ul class="list">
+            <li>Harassment, bullying, or intimidation</li>
+            <li>Discrimination or hate speech</li>
+            <li>Abusive or offensive language</li>
+            <li>Disruptive or unethical activity</li>
+            <li>Breach of privacy or misrepresentation</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="doc-section" id="unacceptable">
+      <h2 class="section-title"><span class="num">4.</span>Unacceptable Behavior</h2>
+      <p class="section-lede">The following behaviors are not tolerated within the community, during events, meetings, online discussions, or any community-related activities.</p>
+
+      <div class="violation-item">
+        <h4>4.1 Harassment and Bullying</h4>
+        <ul class="list">
+          <li>Intimidating, threatening, or targeting members</li>
+          <li>Repeated unwanted messages or contact</li>
+          <li>Public humiliation or personal attacks</li>
+          <li>Mocking, insulting, or belittling others</li>
+        </ul>
+      </div>
+      <div class="violation-item">
+        <h4>4.2 Discrimination and Hate Speech</h4>
+        <ul class="list">
+          <li>Racist, sexist, or discriminatory remarks</li>
+          <li>Offensive jokes or comments about identity or background</li>
+          <li>Hate speech directed at individuals or groups</li>
+          <li>Excluding others based on personal characteristics</li>
+        </ul>
+      </div>
+      <div class="violation-item">
+        <h4>4.3 Abusive or Offensive Language</h4>
+        <ul class="list">
+          <li>Use of vulgar, aggressive, or inappropriate language</li>
+          <li>Verbal abuse during meetings or discussions</li>
+          <li>Hostile arguments intended to provoke conflict</li>
+          <li>Posting offensive or inappropriate content</li>
+        </ul>
+      </div>
+      <div class="violation-item">
+        <h4>4.4 Disruptive Behavior</h4>
+        <ul class="list">
+          <li>Interrupting speakers repeatedly</li>
+          <li>Spamming chats, channels, or platforms</li>
+          <li>Deliberately derailing discussions or events</li>
+          <li>Creating unnecessary conflict within the community</li>
+        </ul>
+      </div>
+      <div class="violation-item">
+        <h4>4.5 Unethical Cybersecurity Activities</h4>
+        <ul class="list">
+          <li>Sharing malware, harmful scripts, or malicious tools</li>
+          <li>Encouraging illegal hacking or unauthorized access</li>
+          <li>Promoting cybercrime or unethical behavior</li>
+          <li>Attempting to compromise community systems or platforms</li>
+        </ul>
+      </div>
+      <div class="violation-item">
+        <h4>4.6 Breach of Privacy or Confidentiality</h4>
+        <ul class="list">
+          <li>Sharing private conversations without consent</li>
+          <li>Posting confidential information from employers or members</li>
+          <li>Recording meetings or events without permission</li>
+          <li>Doxxing or exposing personal information</li>
+        </ul>
+      </div>
+      <div class="violation-item">
+        <h4>4.7 Abuse of Leadership or Authority</h4>
+        <ul class="list">
+          <li>Misusing leadership privileges or influence</li>
+          <li>Favoritism or unfair treatment of members</li>
+          <li>Retaliation against members who raise concerns</li>
+          <li>Making decisions without fairness or transparency</li>
+        </ul>
+      </div>
+      <div class="violation-item">
+        <h4>4.8 Misrepresentation and Dishonesty</h4>
+        <ul class="list">
+          <li>Impersonating another person or organization</li>
+          <li>Providing false information intentionally</li>
+          <li>Claiming ownership of another person's work</li>
+          <li>Misrepresenting qualifications, certifications, or experience</li>
+        </ul>
+      </div>
+      <div class="violation-item">
+        <h4>4.9 Inappropriate Conduct During Events</h4>
+        <ul class="list">
+          <li>Disrespectful behavior toward speakers or organizers</li>
+          <li>Excessive disruption during meetings or sessions</li>
+          <li>Ignoring event guidelines and instructions</li>
+          <li>Any behavior that makes others feel unsafe or uncomfortable</li>
+        </ul>
+      </div>
+      <div class="violation-item">
+        <h4>4.10 Damage to Community Reputation</h4>
+        <ul class="list">
+          <li>Public actions that intentionally harm the community's image</li>
+          <li>Spreading false rumors about members or leaders</li>
+          <li>Using the community name for unauthorized activities</li>
+          <li>Engaging in conduct that conflicts with community values and ethics</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="doc-section" id="leadership">
+      <h2 class="section-title"><span class="num">5.</span>Leadership Commitment</h2>
+      <p class="section-lede">Community leaders are expected to actively support and participate in the growth and management of the community. Consistent absence without communication affects the effectiveness of the leadership team and the community as a whole.</p>
+
+      <h3 class="sub">5.1 Leadership Responsibilities</h3>
+      <ul class="list">
+        <li>Model professionalism, inclusivity, and ethical behavior</li>
+        <li>Clearly communicate community guidelines and expectations</li>
+        <li>Foster a welcoming and psychologically safe environment</li>
+        <li>Moderate discussions and enforce rules fairly and consistently</li>
+        <li>Protect participant privacy and handle sensitive information responsibly</li>
+        <li>Ensure content shared aligns with security best practices and integrity</li>
+      </ul>
+
+      <h3 class="sub">5.2 Mandatory Meeting Attendance</h3>
+      <p style="color:var(--text-secondary); font-size:14.5px; max-width:720px;">Leaders are expected to attend all mandatory leadership meetings (weekly, bi-weekly, or monthly syncs), be punctual and prepared, actively participate in discussions and decision-making, and stay informed on community updates, plans, and responsibilities.</p>
+
+      <p style="color:var(--text-secondary); font-size:14.5px; max-width:720px; margin-top:14px;"><b style="color:var(--text);">If a leader is unable to attend a meeting:</b> notify the community lead/coordinator in advance with a valid reason, share a handover/update on any assigned responsibilities, and review meeting outcomes afterward to stay aligned.</p>
+
+      <h3 class="sub">Missed meeting policy</h3>
+      <p style="color:var(--text-secondary); font-size:14.5px; max-width:720px; margin-top:-4px;">Failure to attend meetings without prior communication is considered a breach of leadership responsibility, and is handled through the following escalation:</p>
+      <ol class="escalation">
+        <li>
+          <div class="step-num">1</div>
+          <div class="step-text"><b>1st missed meeting — no notice</b><span>Reminder and awareness discussion</span></div>
+        </li>
+        <li>
+          <div class="step-num">2</div>
+          <div class="step-text"><b>2nd missed meeting</b><span>Formal warning and expectation reset</span></div>
+        </li>
+        <li>
+          <div class="step-num">3</div>
+          <div class="step-text"><b>3rd missed meeting</b><span>Removal from leadership position if there is no improvement or communication</span></div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="doc-section" id="speakers">
+      <h2 class="section-title"><span class="num">6.</span>Speaker &amp; Contributor Responsibilities</h2>
+      <p class="section-lede">Speakers, panelists, and contributors must:</p>
+      <ul class="list">
+        <li>Share content that is accurate, relevant, and appropriate</li>
+        <li>Avoid disclosing confidential organizational information or client/employer-sensitive data</li>
+        <li>Clearly state when expressing personal opinions versus factual information</li>
+        <li>Acknowledge when unsure and avoid speculation</li>
+      </ul>
+    </section>
+
+    <section class="doc-section" id="reporting">
+      <h2 class="section-title"><span class="num">7.</span>Reporting &amp; Incident Handling</h2>
+      <p class="section-lede">If you experience or witness inappropriate behavior, report it to a community leader or moderator, and provide relevant details (what, when, where, who).</p>
+      <table class="plain">
+        <tr><td class="label">Reviewed</td><td>All reports will be reviewed promptly</td></tr>
+        <tr><td class="label">Confidential</td><td>All reports will be handled confidentially</td></tr>
+        <tr><td class="label">Fair</td><td>All reports will be addressed fairly</td></tr>
+      </table>
+    </section>
+
+    <section class="doc-section" id="violations">
+      <h2 class="section-title"><span class="num">8.</span>Violation of Community Rules</h2>
+      <p class="section-lede">To maintain a safe and respectful environment, violations of the community rules may result in disciplinary action depending on the severity of the offense.</p>
+
+      <span class="tag minor">Minor Violations</span>
+      <ul class="list">
+        <li>Warning and guidance on community guidelines</li>
+        <li>Monitoring and follow-up</li>
+      </ul>
+
+      <span class="tag major" style="margin-top:18px; display:inline-block;">Major Violations</span>
+      <ul class="list">
+        <li>Harassment, discrimination, or data misuse</li>
+        <li>Immediate removal from event/platform</li>
+        <li>Escalation to relevant authorities if required by law or safety concerns</li>
+      </ul>
+    </section>
+  </main>
+</div>
+
+<footer class="site-footer">
+  © Microsoft Naija Security Group. Community Code of Conduct — Last updated June 2026.
+</footer>
+
+<script>
+  const links = document.querySelectorAll('nav.sidebar a');
+  const sections = document.querySelectorAll('section.doc-section');
+  const map = {};
+  links.forEach(l => map[l.getAttribute('href').slice(1)] = l);
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const link = map[entry.target.id];
+      if(!link) return;
+      if(entry.isIntersecting){
+        links.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-15% 0px -75% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
